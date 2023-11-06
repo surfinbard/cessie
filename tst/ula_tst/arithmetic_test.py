@@ -29,7 +29,7 @@ async def and_with_zero(dut):
     dut.a.value = 0x0000_0000
 
     await RisingEdge(dut.clk)
-    assert dut.s.value == 0x0000_0000, f'And mismatch: s: {dut.s.value} != {dut.a.value}.'
+    assert dut.s.value == 0x0000_0000, f'AND mismatch: s: {dut.s.value} != {dut.a.value}.'
 
 @cocotb.test(skip=False)
 async def and_with_maximum(dut):
@@ -39,29 +39,75 @@ async def and_with_maximum(dut):
     dut.a.value = 0xFFFF_FFFF
 
     await RisingEdge(dut.clk)
-    assert dut.s.value == dut.b.value, f'And mismatch: s: output != {dut.b.value}.'
+    assert dut.s.value == dut.b.value, f'AND mismatch: s: output != {dut.b.value}.'
+
+@cocotb.test(skip=False)
+async def and_by_one(dut):
+    tb = TB(TB.andmod)
+    dut.a.value = 0x0000_0000
+
+    for i in range(10):
+        a = dut.a.value
+        tb.randomize_input();
+        dut.a.value = a + 1
+
+        await RisingEdge(dut.clk);
+        assert dut.s.value == dut.a.value & tb, f'AND mismatch: s: {dut.s.value} != {dut.a.value & tb}.'
+
+@cocotb.test(skip=False)
+async def and_by_n_times(dut):
+    tb = TB(TB.andmod)
+
+    for i in range(10):
+        tb.randomize_input();
+
+        await RisingEdge(dut.clk);
+        assert dut.s.value == (dut.a.value & dut.b.value) & 0xFFFF_FFFF, f'AND mismatch: s: {hex(dut.s.value.integer & 0xFFFF_FFFF)} != {hex((dut.a.value.integer & dut.b.value.integer) & 0xFFFF_FFFF)}.'
 
 ##############################################################
 
 @cocotb.test(skip=False)
 async def or_with_zero(dut):
-    tb = TB(TB.andmod)
+    tb = TB(TB.ormod)
 
     tb.randomize_input()
     dut.a.value = 0x0000_0000
 
     await RisingEdge(dut.clk)
-    assert dut.s.value == dut.b.value, f'And mismatch: s: {dut.s.value} != {dut.b.value}.'
+    assert dut.s.value == dut.b.value, f'OR mismatch: s: {dut.s.value} != {dut.b.value}.'
 
 @cocotb.test(skip=False)
 async def or_with_maximum(dut):
-    tb = TB(TB.andmod)
+    tb = TB(TB.ormod)
 
     tb.randomize_input()
     dut.a.value = 0xFFFF_FFFF
 
     await RisingEdge(dut.clk)
-    assert dut.s.value == 0xFFFF_FFFF, f'And mismatch: s: {dut.s.value} != {dut.a.value}.'
+    assert dut.s.value == 0xFFFF_FFFF, f'OR mismatch: s: {dut.s.value} != {dut.a.value}.'
+
+@cocotb.test(skip=False)
+async def or_by_one(dut):
+    tb = TB(TB.ormod)
+
+    for i in range(10):
+        a = dut.a.value
+        tb.randomize_input();
+        dut.a.value = a + 1
+
+        await RisingEdge(dut.clk);
+        assert dut.s.value == dut.a.value + tb, f'OR mismatch: s: {dut.s.value} != {dut.a.value + tb}.'
+
+@cocotb.test(skip=False)
+async def or_by_n_times(dut):
+    tb = TB(TB.ormod)
+
+    for i in range(10):
+        tb.randomize_input();
+
+        await RisingEdge(dut.clk);
+        assert dut.s.value == (dut.a.value + dut.b.value) & 0x0000_0000, f'OR mismatch: s: {hex(dut.s.value.integer & 0x0000_0000)} != {hex(dut.a.value.integer + dut.b.value.integer)}.'
+
 
 ##############################################################
 
@@ -189,3 +235,15 @@ async def slt_maximum(dut):
         assert dut.s.value == 0x0000_0000, f'And mismatch: s: {dut.s.value} != 0x0000_0000.'
     else:
         assert dut.s.value ==  0xFFFF_FFFF, f'And mismatch: s: {dut.s.value} != 0xFFFF_FFFF.'
+
+###############################################################
+
+@cocotb.test(skip=False)
+async def check_zero(dut):
+    tb = TB(TB.andmod)
+
+    tb.randomize_input()
+    dut.b.value = 0x0000_0000
+
+    await RisingEdge(dut.clk)
+    assert dut.s.value ==  0x0, f'Flag mismatch: ZERO: {dut.s.value} != 00000000.'
