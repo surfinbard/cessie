@@ -1,0 +1,62 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1699663904" />
+    <testcase name="and_with_zero" classname="arithmetic_test" file="/home/criptido/mips-32-subset/tst/ula_tst/arithmetic_test.py" lineno="24" time="0.0005781650543212891" sim_time_ns="0.001" ratio_time="1.7296098969072164">
+      <failure message="Test failed with RANDOM_SEED=1699663904" />
+    </testcase>
+    <testcase name="and_with_maximum" classname="arithmetic_test" file="/home/criptido/mips-32-subset/tst/ula_tst/arithmetic_test.py" lineno="34" time="0.00014138221740722656" sim_time_ns="0.001" ratio_time="7.073025295109613">
+      <failure message="Test failed with RANDOM_SEED=1699663904" />
+    </testcase>
+    <testcase name="and_by_one" classname="arithmetic_test" file="/home/criptido/mips-32-subset/tst/ula_tst/arithmetic_test.py" lineno="44" time="0.0001049041748046875" sim_time_ns="0.001" ratio_time="9.532509090909091">
+      <failure message="Test failed with RANDOM_SEED=1699663904" />
+    </testcase>
+    <testcase name="and_by_n_times" classname="arithmetic_test" file="/home/criptido/mips-32-subset/tst/ula_tst/arithmetic_test.py" lineno="57" time="9.584426879882812e-05" sim_time_ns="0.001" ratio_time="10.433592039800995">
+      <failure message="Test failed with RANDOM_SEED=1699663904" />
+    </testcase>
+    <testcase name="or_with_zero" classname="arithmetic_test" file="/home/criptido/mips-32-subset/tst/ula_tst/arithmetic_test.py" lineno="69" time="7.510185241699219e-05" sim_time_ns="0.001" ratio_time="13.315250793650794">
+      <failure message="Test failed with RANDOM_SEED=1699663904" />
+    </testcase>
+    <testcase name="or_with_maximum" classname="arithmetic_test" file="/home/criptido/mips-32-subset/tst/ula_tst/arithmetic_test.py" lineno="79" time="6.961822509765625e-05" sim_time_ns="0.001" ratio_time="14.364054794520548">
+      <failure message="Test failed with RANDOM_SEED=1699663904" />
+    </testcase>
+    <testcase name="or_by_one" classname="arithmetic_test" file="/home/criptido/mips-32-subset/tst/ula_tst/arithmetic_test.py" lineno="89" time="6.4849853515625e-05" sim_time_ns="0.001" ratio_time="15.420235294117647">
+      <failure message="Test failed with RANDOM_SEED=1699663904" />
+    </testcase>
+    <testcase name="or_by_n_times" classname="arithmetic_test" file="/home/criptido/mips-32-subset/tst/ula_tst/arithmetic_test.py" lineno="101" time="8.177757263183594e-05" sim_time_ns="0.001" ratio_time="12.228291545189505">
+      <failure message="Test failed with RANDOM_SEED=1699663904" />
+    </testcase>
+    <testcase name="add_with_zero" classname="arithmetic_test" file="/home/criptido/mips-32-subset/tst/ula_tst/arithmetic_test.py" lineno="114" time="6.580352783203125e-05" sim_time_ns="0.0009999999999999992" ratio_time="15.196753623188393">
+      <failure message="Test failed with RANDOM_SEED=1699663904" />
+    </testcase>
+    <testcase name="add_by_one" classname="arithmetic_test" file="/home/criptido/mips-32-subset/tst/ula_tst/arithmetic_test.py" lineno="126" time="6.079673767089844e-05" sim_time_ns="0.0010000000000000009" ratio_time="16.44825098039217">
+      <failure message="Test failed with RANDOM_SEED=1699663904" />
+    </testcase>
+    <testcase name="add_by_maximum" classname="arithmetic_test" file="/home/criptido/mips-32-subset/tst/ula_tst/arithmetic_test.py" lineno="138" time="6.222724914550781e-05" sim_time_ns="0.0009999999999999992" ratio_time="16.07013026819922">
+      <failure message="Test failed with RANDOM_SEED=1699663904" />
+    </testcase>
+    <testcase name="add_by_n_times" classname="arithmetic_test" file="/home/criptido/mips-32-subset/tst/ula_tst/arithmetic_test.py" lineno="149" time="5.936622619628906e-05" sim_time_ns="0.0010000000000000009" ratio_time="16.844594377510056">
+      <failure message="Test failed with RANDOM_SEED=1699663904" />
+    </testcase>
+    <testcase name="sub_with_zero" classname="arithmetic_test" file="/home/criptido/mips-32-subset/tst/ula_tst/arithmetic_test.py" lineno="161" time="6.461143493652344e-05" sim_time_ns="0.0009999999999999992" ratio_time="15.4771365313653">
+      <failure message="Test failed with RANDOM_SEED=1699663904" />
+    </testcase>
+    <testcase name="sub_one_less_number" classname="arithmetic_test" file="/home/criptido/mips-32-subset/tst/ula_tst/arithmetic_test.py" lineno="175" time="5.745887756347656e-05" sim_time_ns="0.0010000000000000009" ratio_time="17.403751037344414">
+      <failure message="Test failed with RANDOM_SEED=1699663904" />
+    </testcase>
+    <testcase name="sub_by_maximum" classname="arithmetic_test" file="/home/criptido/mips-32-subset/tst/ula_tst/arithmetic_test.py" lineno="189" time="6.008148193359375e-05" sim_time_ns="0.0009999999999999992" ratio_time="16.644063492063477">
+      <failure message="Test failed with RANDOM_SEED=1699663904" />
+    </testcase>
+    <testcase name="sub_by_n_times" classname="arithmetic_test" file="/home/criptido/mips-32-subset/tst/ula_tst/arithmetic_test.py" lineno="200" time="0.00010704994201660156" sim_time_ns="0.0010000000000000009" ratio_time="9.341434298440989">
+      <failure message="Test failed with RANDOM_SEED=1699663904" />
+    </testcase>
+    <testcase name="slt_zero" classname="arithmetic_test" file="/home/criptido/mips-32-subset/tst/ula_tst/arithmetic_test.py" lineno="212" time="6.318092346191406e-05" sim_time_ns="0.0010000000000000009" ratio_time="15.827562264150957">
+      <failure message="Test failed with RANDOM_SEED=1699663904" />
+    </testcase>
+    <testcase name="slt_maximum" classname="arithmetic_test" file="/home/criptido/mips-32-subset/tst/ula_tst/arithmetic_test.py" lineno="226" time="5.793571472167969e-05" sim_time_ns="0.0009999999999999974" ratio_time="17.2605102880658">
+      <failure message="Test failed with RANDOM_SEED=1699663904" />
+    </testcase>
+    <testcase name="check_zero" classname="arithmetic_test" file="/home/criptido/mips-32-subset/tst/ula_tst/arithmetic_test.py" lineno="241" time="6.127357482910156e-05" sim_time_ns="0.0010000000000000009" ratio_time="16.32024902723737">
+      <failure message="Test failed with RANDOM_SEED=1699663904" />
+    </testcase>
+  </testsuite>
+</testsuites>

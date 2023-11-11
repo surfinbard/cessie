@@ -5,7 +5,7 @@ SIM = icarus
 TOPLEVEL_LANG = verilog
 
 VERILOG_SOURCES += ../../src/types.sv 			\
-				   ../../src/aritmethic.sv 		\
+				   ../../src/arithmetic.sv 		\
 				   ../../src/add.sv 			\
 				   ../../src/sub.sv 			\
 				   ../../src/and.sv 			\
