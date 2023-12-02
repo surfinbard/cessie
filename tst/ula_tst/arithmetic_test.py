@@ -85,6 +85,8 @@ async def or_with_maximum(dut):
 @cocotb.test(skip=False)
 async def or_by_one(dut):
     tb = TB(TB.ormod)
+    dut.a.value = 0x0000_0000
+    await Timer(1, units='ns')
 
     for i in range(10):
         a = dut.a.value
@@ -92,7 +94,8 @@ async def or_by_one(dut):
         dut.a.value = a + 1
 
         await Timer(10, units='ns')
-        assert dut.s.value == dut.a.value + dut.b.value, f'OR mismatch: s: {dut.s.value} != {dut.a.value + dut.b.value}.'
+        a_or_b = (bin(dut.a.value | dut.b.value)[2:]).zfill(32)
+        assert str(dut.s.value) == str(a_or_b), f'OR mismatch: s: {dut.s.value} != {a_or_b}.'
 
 @cocotb.test(skip=False)
 async def or_by_n_times(dut):
@@ -102,7 +105,8 @@ async def or_by_n_times(dut):
         tb.randomize_input()
 
         await Timer(10, units='ns')
-        assert dut.s.value == (dut.a.value + dut.b.value) & 0x0000_0000, f'OR mismatch: s: {hex(dut.s.value.integer & 0x0000_0000)} != {hex(dut.a.value.integer + dut.b.value.integer)}.'
+        a_or_b = (bin(dut.a.value | dut.b.value)[2:]).zfill(32)
+        assert str(dut.s.value) == str(a_or_b), f'OR mismatch: s: {dut.s.value} != {a_or_b}.'
 
 
 ##############################################################
@@ -207,30 +211,29 @@ async def sub_by_n_times(dut):
 
 @cocotb.test(skip=False)
 async def slt_zero(dut):
-    tb = TB(TB.andmod)
+    tb = TB(TB.slt)
 
     tb.randomize_input()
     dut.b.value = 0x0000_0000
 
     await Timer(10, units='ns')
-    if dut.a.value < dut.b.value:   
-        assert dut.s.value == 0x1, f'And mismatch: s: {dut.s.value} != 11111111.'
+    if int(dut.a.value) < int(dut.b.value):   
+        assert dut.s.value == 0xFFFF_FFFF, f'SLT mismatch: s: {dut.s.value} != {bin(0xFFFF_FFFF)[2:]}.'
     else:
-        assert dut.s.value ==  0x0, f'And mismatch: s: {dut.s.value} != 00000000.'
+        assert dut.s.value ==  0x0000_0000, f'SLT mismatch: s: {dut.s.value} != {bin(0x0000_0000)[2:]}.'
 
-#rever
 @cocotb.test(skip=False)
 async def slt_maximum(dut):
-    tb = TB(TB.andmod)
+    tb = TB(TB.slt)
 
     tb.randomize_input()
     dut.a.value = 0xFFFF_FFFF
 
     await Timer(10, units='ns')
-    if dut.a.value > dut.b.value:   
-        assert dut.s.value == 0x0000_0000, f'And mismatch: s: {dut.s.value} != 0x0000_0000.'
+    if int(dut.a.value) > int(dut.b.value):   
+        assert dut.s.value == 0x0000_0000, f'SLT mismatch: s: {dut.s.value} != {bin(0x0000_0000)[2:]}.'
     else:
-        assert dut.s.value ==  0xFFFF_FFFF, f'And mismatch: s: {dut.s.value} != 0xFFFF_FFFF.'
+        assert dut.s.value ==  0xFFFF_FFFF, f'SLT mismatch: s: {dut.s.value} != {bin(0xFFFF_FFFF)[2:]}.'
 
 ###############################################################
 

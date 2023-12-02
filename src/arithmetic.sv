@@ -7,10 +7,8 @@ import types::*;
     output bus_t zero    
 );
 
-wire bus_t slt_sel;
+bus_t slt_sel;
 bus_t results_and, results_or, results_add, results_sub, results_slt, results_nor;
-
-assign slt_sel = (sel == SLT) ? '0 : '1;
 
 AndModule and_instance(.a(a), .b(b), .s(results_and));
 
@@ -20,11 +18,13 @@ AddModule add_instance(.a(a), .b(b), .s(results_add));
 
 SubModule sub_instance(.a(a), .b(b), .s(results_sub));
 
-SltModule slt_instance(.a(a), .b(b), .sel(slt_sel), .s(results_slt));
+SltModule slt_instance(.a(a), .b(b), .slt_sel(slt_sel), .s(results_slt));
 
 NorModule nor_instance(.a(a), .b(b), .s(results_nor));
 
 always_comb begin
+    //todo update to test signed
+    slt_sel = 0;
     case(sel)
         AND:            s = results_and;
         OR:             s = results_or;

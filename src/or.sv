@@ -8,5 +8,4 @@ module OrModule
 
   always_comb s = a | b;
 
-
 endmodule : OrModule
