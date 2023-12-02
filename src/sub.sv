@@ -1,11 +1,11 @@
-module Sub
+module SubModule
   import types::*;
 (
     input  bus_t a,
                  b,
-    output bus_t s,
+    output bus_t s
     );
 
   assign s = a - b;
 
-endmodule : Sub
+endmodule : SubModule

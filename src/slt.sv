@@ -1,11 +1,22 @@
-module Slt
+module SltModule
   import types::*;
 (
     input  bus_t a,
                  b,
-    output bus_t s,
+                 sel,
+    output bus_t s
 );
 
-  assign s = a < b ? '1 : '0;
+  wire signed [0:31] signed_a, signed_b;
 
-endmodule : Slt
+  assign signed_a = signed'(a);
+  assign signed_b = signed'(b);
+
+  always_comb begin
+    if (sel) 
+      s = a < b ? 1 : 0;
+    else 
+      s = signed_a < signed_b ? 1 : 0;
+  end 
+
+endmodule : SltModule

@@ -2,36 +2,39 @@ module Aritmethic
 import types::*;
 (
     input bus_t a, b,
-    input oper_t sel,
+    input ula_oper_t sel,
     output bus_t s,
     output bus_t zero    
 );
 
+wire bus_t slt_sel;
 bus_t results_and, results_or, results_add, results_sub, results_slt, results_nor;
 
-AndModule e(.a(a), .b(b), .s(results_and));
+assign slt_sel = (sel == SLT) ? '0 : '1;
 
-OrModule ou(.a(a), .b(b), .s(results_or));
+AndModule and_instance(.a(a), .b(b), .s(results_and));
 
-Add add(.a(a), .b(b), .s(results_add));
+OrModule or_instance(.a(a), .b(b), .s(results_or));
 
-Sub sub(.a(a), .b(b), .s(results_sub));
+AddModule add_instance(.a(a), .b(b), .s(results_add));
 
-Slt slt(.a(a), .b(b), .s(results_slt));
+SubModule sub_instance(.a(a), .b(b), .s(results_sub));
 
-Nor nor(.a(a), .b(b), .s(results_nor));
+SltModule slt_instance(.a(a), .b(b), .sel(slt_sel), .s(results_slt));
+
+NorModule nor_instance(.a(a), .b(b), .s(results_nor));
 
 always_comb begin
     case(sel)
-        AND: s = results_and;
-        OR: s = results_or;
-        ADD: s = results_add;
-        SUB: s = results_sub;
-        SLT: s = results_slt;
-        NOR: s = results_nor;
+        AND:            s = results_and;
+        OR:             s = results_or;
+        ADD:            s = results_add;
+        SUB:            s = results_sub;
+        SLT, SLTU:      s = results_slt;
+        NOR:            s = results_nor;
     endcase
-    if (s == 0') begin
-        zero = 1'
+    if (s == 4'b000) begin
+        zero = 4'b1111;
     end
 end
 

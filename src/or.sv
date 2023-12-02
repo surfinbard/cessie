@@ -3,7 +3,7 @@ module OrModule
 (
     input  bus_t a,
                  b,
-    output bus_t s,
+    output bus_t s
 );
 
   always_comb s = a | b;
