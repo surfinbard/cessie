@@ -1,26 +1,24 @@
 <testsuites name="results">
   <testsuite name="all" package="all">
-    <property name="random_seed" value="1701524211" />
-    <testcase name="and_with_zero" classname="arithmetic_test" file="/home/criptido/mips-32-subset/tst/ula_tst/arithmetic_test.py" lineno="22" time="0.0007722377777099609" sim_time_ns="10.001" ratio_time="12950.674376041987" />
-    <testcase name="and_with_maximum" classname="arithmetic_test" file="/home/criptido/mips-32-subset/tst/ula_tst/arithmetic_test.py" lineno="32" time="0.00020265579223632812" sim_time_ns="10.001" ratio_time="49349.68741647059" />
-    <testcase name="and_by_one" classname="arithmetic_test" file="/home/criptido/mips-32-subset/tst/ula_tst/arithmetic_test.py" lineno="42" time="0.0007734298706054688" sim_time_ns="100.001" ratio_time="129295.49762762022" />
-    <testcase name="and_by_n_times" classname="arithmetic_test" file="/home/criptido/mips-32-subset/tst/ula_tst/arithmetic_test.py" lineno="53" time="0.0006165504455566406" sim_time_ns="100.00099999999999" ratio_time="162194.35201237432" />
-    <testcase name="or_with_zero" classname="arithmetic_test" file="/home/criptido/mips-32-subset/tst/ula_tst/arithmetic_test.py" lineno="65" time="0.00013327598571777344" sim_time_ns="10.001000000000005" ratio_time="75039.77514132383" />
-    <testcase name="or_with_maximum" classname="arithmetic_test" file="/home/criptido/mips-32-subset/tst/ula_tst/arithmetic_test.py" lineno="75" time="0.0001285076141357422" sim_time_ns="10.001000000000005" ratio_time="77824.18238218928" />
-    <testcase name="or_by_one" classname="arithmetic_test" file="/home/criptido/mips-32-subset/tst/ula_tst/arithmetic_test.py" lineno="85" time="0.0007431507110595703" sim_time_ns="101.001" ratio_time="135909.17494513956" />
-    <testcase name="or_by_n_times" classname="arithmetic_test" file="/home/criptido/mips-32-subset/tst/ula_tst/arithmetic_test.py" lineno="100" time="0.0006737709045410156" sim_time_ns="100.00099999999998" ratio_time="148419.8847501769" />
-    <testcase name="add_with_zero" classname="arithmetic_test" file="/home/criptido/mips-32-subset/tst/ula_tst/arithmetic_test.py" lineno="114" time="0.0005838871002197266" sim_time_ns="100.00100000000003" ratio_time="171267.69877664358" />
-    <testcase name="add_by_one" classname="arithmetic_test" file="/home/criptido/mips-32-subset/tst/ula_tst/arithmetic_test.py" lineno="126" time="0.0005922317504882812" sim_time_ns="100.00099999999998" ratio_time="168854.50656360705" />
-    <testcase name="add_by_maximum" classname="arithmetic_test" file="/home/criptido/mips-32-subset/tst/ula_tst/arithmetic_test.py" lineno="138" time="0.00012564659118652344" sim_time_ns="10.000999999999976" ratio_time="79596.27002656528" />
-    <testcase name="add_by_n_times" classname="arithmetic_test" file="/home/criptido/mips-32-subset/tst/ula_tst/arithmetic_test.py" lineno="149" time="0.0008454322814941406" sim_time_ns="100.00099999999998" ratio_time="118283.86754201914" />
-    <testcase name="sub_with_zero" classname="arithmetic_test" file="/home/criptido/mips-32-subset/tst/ula_tst/arithmetic_test.py" lineno="161" time="0.0006291866302490234" sim_time_ns="100.00100000000009" ratio_time="158936.9436544147" />
-    <testcase name="sub_one_less_number" classname="arithmetic_test" file="/home/criptido/mips-32-subset/tst/ula_tst/arithmetic_test.py" lineno="175" time="0.0005674362182617188" sim_time_ns="100.00099999999998" ratio_time="176233.02281680668" />
-    <testcase name="sub_by_maximum" classname="arithmetic_test" file="/home/criptido/mips-32-subset/tst/ula_tst/arithmetic_test.py" lineno="189" time="0.00011491775512695312" sim_time_ns="10.000999999999976" ratio_time="87027.45706224046" />
-    <testcase name="sub_by_n_times" classname="arithmetic_test" file="/home/criptido/mips-32-subset/tst/ula_tst/arithmetic_test.py" lineno="200" time="0.0006101131439208984" sim_time_ns="100.00100000000009" ratio_time="163905.6640500197" />
-    <testcase name="slt_zero" classname="arithmetic_test" file="/home/criptido/mips-32-subset/tst/ula_tst/arithmetic_test.py" lineno="212" time="0.0001385211944580078" sim_time_ns="10.000999999999976" ratio_time="72198.33787263322">
-      <failure message="Test failed with RANDOM_SEED=1701524211" />
-    </testcase>
-    <testcase name="slt_maximum" classname="arithmetic_test" file="/home/criptido/mips-32-subset/tst/ula_tst/arithmetic_test.py" lineno="225" time="0.00013375282287597656" sim_time_ns="10.000999999999976" ratio_time="74772.2536613189" />
-    <testcase name="check_zero" classname="arithmetic_test" file="/home/criptido/mips-32-subset/tst/ula_tst/arithmetic_test.py" lineno="240" time="0.00012087821960449219" sim_time_ns="10.000999999999976" ratio_time="82736.16233530552" />
+    <property name="random_seed" value="1701712435" />
+    <testcase name="and_with_zero" classname="arithmetic_test" file="/home/criptido/mips-32-subset/tst/ula_tst/arithmetic_test.py" lineno="22" time="0.0007152557373046875" sim_time_ns="10.001" ratio_time="13982.411434666667" />
+    <testcase name="and_with_maximum" classname="arithmetic_test" file="/home/criptido/mips-32-subset/tst/ula_tst/arithmetic_test.py" lineno="32" time="0.000225067138671875" sim_time_ns="10.001" ratio_time="44435.629559322035" />
+    <testcase name="and_by_one" classname="arithmetic_test" file="/home/criptido/mips-32-subset/tst/ula_tst/arithmetic_test.py" lineno="42" time="0.0007317066192626953" sim_time_ns="100.001" ratio_time="136668.1636702509" />
+    <testcase name="and_by_n_times" classname="arithmetic_test" file="/home/criptido/mips-32-subset/tst/ula_tst/arithmetic_test.py" lineno="53" time="0.0006906986236572266" sim_time_ns="100.00099999999999" ratio_time="144782.39361546427" />
+    <testcase name="or_with_zero" classname="arithmetic_test" file="/home/criptido/mips-32-subset/tst/ula_tst/arithmetic_test.py" lineno="65" time="0.00016236305236816406" sim_time_ns="10.001000000000005" ratio_time="61596.52614390605" />
+    <testcase name="or_with_maximum" classname="arithmetic_test" file="/home/criptido/mips-32-subset/tst/ula_tst/arithmetic_test.py" lineno="75" time="0.00014472007751464844" sim_time_ns="10.001000000000005" ratio_time="69105.8225766063" />
+    <testcase name="or_by_one" classname="arithmetic_test" file="/home/criptido/mips-32-subset/tst/ula_tst/arithmetic_test.py" lineno="85" time="0.0006999969482421875" sim_time_ns="101.001" ratio_time="144287.77190190737" />
+    <testcase name="or_by_n_times" classname="arithmetic_test" file="/home/criptido/mips-32-subset/tst/ula_tst/arithmetic_test.py" lineno="100" time="0.0006263256072998047" sim_time_ns="100.00099999999998" ratio_time="159662.95938484962" />
+    <testcase name="add_with_zero" classname="arithmetic_test" file="/home/criptido/mips-32-subset/tst/ula_tst/arithmetic_test.py" lineno="114" time="0.0006394386291503906" sim_time_ns="100.00100000000003" ratio_time="156388.7376226697" />
+    <testcase name="add_by_one" classname="arithmetic_test" file="/home/criptido/mips-32-subset/tst/ula_tst/arithmetic_test.py" lineno="126" time="0.0006313323974609375" sim_time_ns="100.00099999999998" ratio_time="158396.75011480358" />
+    <testcase name="add_by_maximum" classname="arithmetic_test" file="/home/criptido/mips-32-subset/tst/ula_tst/arithmetic_test.py" lineno="138" time="0.0001499652862548828" sim_time_ns="10.000999999999976" ratio_time="66688.76677901416" />
+    <testcase name="add_by_n_times" classname="arithmetic_test" file="/home/criptido/mips-32-subset/tst/ula_tst/arithmetic_test.py" lineno="149" time="0.0006117820739746094" sim_time_ns="100.00099999999998" ratio_time="163458.5324645362" />
+    <testcase name="sub_with_zero" classname="arithmetic_test" file="/home/criptido/mips-32-subset/tst/ula_tst/arithmetic_test.py" lineno="161" time="0.00064849853515625" sim_time_ns="100.00100000000009" ratio_time="154203.894964706" />
+    <testcase name="sub_one_less_number" classname="arithmetic_test" file="/home/criptido/mips-32-subset/tst/ula_tst/arithmetic_test.py" lineno="175" time="0.0006203651428222656" sim_time_ns="100.00099999999998" ratio_time="161197.00011683317" />
+    <testcase name="sub_by_maximum" classname="arithmetic_test" file="/home/criptido/mips-32-subset/tst/ula_tst/arithmetic_test.py" lineno="189" time="0.00020384788513183594" sim_time_ns="10.000999999999976" ratio_time="49061.09275321626" />
+    <testcase name="sub_by_n_times" classname="arithmetic_test" file="/home/criptido/mips-32-subset/tst/ula_tst/arithmetic_test.py" lineno="200" time="0.0006084442138671875" sim_time_ns="100.00100000000009" ratio_time="164355.24855172427" />
+    <testcase name="slt_zero" classname="arithmetic_test" file="/home/criptido/mips-32-subset/tst/ula_tst/arithmetic_test.py" lineno="212" time="0.00014281272888183594" sim_time_ns="10.000999999999976" ratio_time="70028.77179298815" />
+    <testcase name="slt_maximum" classname="arithmetic_test" file="/home/criptido/mips-32-subset/tst/ula_tst/arithmetic_test.py" lineno="225" time="0.00011849403381347656" sim_time_ns="10.000999999999976" ratio_time="84400.87385110644" />
+    <testcase name="check_zero" classname="arithmetic_test" file="/home/criptido/mips-32-subset/tst/ula_tst/arithmetic_test.py" lineno="240" time="0.00011420249938964844" sim_time_ns="10.000999999999976" ratio_time="87572.51420459269" />
   </testsuite>
 </testsuites>

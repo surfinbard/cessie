@@ -218,9 +218,9 @@ async def slt_zero(dut):
 
     await Timer(10, units='ns')
     if int(dut.a.value) < int(dut.b.value):   
-        assert dut.s.value == 0xFFFF_FFFF, f'SLT mismatch: s: {dut.s.value} != {bin(0xFFFF_FFFF)[2:]}.'
+        assert dut.s.value == 0x0000_0001, f'SLT mismatch: s: {dut.s.value} != 1.'
     else:
-        assert dut.s.value ==  0x0000_0000, f'SLT mismatch: s: {dut.s.value} != {bin(0x0000_0000)[2:]}.'
+        assert dut.s.value ==  0x0000_0000, f'SLT mismatch: s: {dut.s.value} != 0.'
 
 @cocotb.test(skip=False)
 async def slt_maximum(dut):
@@ -231,9 +231,9 @@ async def slt_maximum(dut):
 
     await Timer(10, units='ns')
     if int(dut.a.value) > int(dut.b.value):   
-        assert dut.s.value == 0x0000_0000, f'SLT mismatch: s: {dut.s.value} != {bin(0x0000_0000)[2:]}.'
+        assert dut.s.value == 0x0000_0000, f'SLT mismatch: s: {dut.s.value} != 0.'
     else:
-        assert dut.s.value ==  0xFFFF_FFFF, f'SLT mismatch: s: {dut.s.value} != {bin(0xFFFF_FFFF)[2:]}.'
+        assert dut.s.value ==  0x0000_0001, f'SLT mismatch: s: {dut.s.value} != 1.'
 
 ###############################################################
 
