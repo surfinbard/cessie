@@ -1,0 +1,9 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1701890226" />
+    <testcase name="reset" classname="regfile_test" file="/home/criptido/mips-32-subset/tst/regfile_test/regfile_test.py" lineno="31" time="0.009371280670166016" sim_time_ns="32.001" ratio_time="3414.7947464509234" />
+    <testcase name="write_once" classname="regfile_test" file="/home/criptido/mips-32-subset/tst/regfile_test/regfile_test.py" lineno="44" time="7.891654968261719e-05" sim_time_ns="0.0010000000000047748" ratio_time="12.671613293111864">
+      <failure message="Test failed with RANDOM_SEED=1701890226" />
+    </testcase>
+  </testsuite>
+</testsuites>
