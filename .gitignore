@@ -1,1 +1,3 @@
 venv/
+tst/*/__pycache__/
+tst/*/sim_build/
