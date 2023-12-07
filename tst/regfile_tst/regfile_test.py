@@ -20,11 +20,6 @@ class TB:
         TB.dut.enable.value = 0
         TB.dut.data.value = 0
 
-        # RST all
-        for i in range(32):
-            TB.dut.registers[i].value = 0x0
-        await RisingEdge(TB.dut.clk)
-
 @cocotb.test(skip=False)
 async def reset(dut):
     tb = TB()
