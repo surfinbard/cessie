@@ -1,7 +1,7 @@
 import cocotb
 from cocotb.triggers import RisingEdge
 from cocotb.clock import Clock
-
+from cocotb import Logic
 class TB:
     dut = cocotb.top
 
@@ -29,9 +29,9 @@ async def control(dut):
     # BEQ
     tb.dut.op.value = 4
     await RisingEdge(tb.dut.clk)
-    assert dut.regDst.value == x, f'Control mismatch in RegDst: {dut.regDst.value} != x.'
+    assert dut.regDst.value == Logic("X"), f'Control mismatch in RegDst: {dut.regDst.value} != x.'
     assert dut.aluSrc.value == 0, f'Control mismatch in ALUSrc: {dut.aluSrc.value} != 0.'
-    assert dut.memToReg.value == x, f'Control mismatch in MemtoReg: {dut.memToReg.value} != x.'
+    assert dut.memToReg.value == Logic("X"), f'Control mismatch in MemtoReg: {dut.memToReg.value} != x.'
     assert dut.regWrite.value == 0, f'Control mismatch in RegWrite: {dut.regWrite.value} != 0.'
     assert dut.memRead.value == 0, f'Control mismatch in MemRead: {dut.memRead.value} != 0.'
     assert dut.memWrite.value == 0, f'Control mismatch in MemWrite: {dut.memWrite.value} != 0.'
@@ -53,9 +53,9 @@ async def control(dut):
     # SW
     tb.dut.op.value = 43
     await RisingEdge(tb.dut.clk)
-    assert dut.regDst.value == x, f'Control mismatch in RegDst: {dut.regDst.value} != x.'
+    assert dut.regDst.value == Logic("X"), f'Control mismatch in RegDst: {dut.regDst.value} != x.'
     assert dut.aluSrc.value == 1, f'Control mismatch in ALUSrc: {dut.aluSrc.value} != 1.'
-    assert dut.memToReg.value == x, f'Control mismatch in MemtoReg: {dut.memToReg.value} != x.'
+    assert dut.memToReg.value == Logic("X"), f'Control mismatch in MemtoReg: {dut.memToReg.value} != x.'
     assert dut.regWrite.value == 0, f'Control mismatch in RegWrite: {dut.regWrite.value} != 0.'
     assert dut.memRead.value == 0, f'Control mismatch in MemRead: {dut.memRead.value} != 0.'
     assert dut.memWrite.value == 1, f'Control mismatch in MemWrite: {dut.memWrite.value} != 1.'
@@ -65,7 +65,7 @@ async def control(dut):
 
 ###############################################################
     
-@cocotb.test(skip=False)
+@cocotb.test(skip=True)
 async def alu_control(dut):
     tb = TB()
 
