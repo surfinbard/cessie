@@ -6,32 +6,32 @@
 package types;
   parameter int WIDTH = `_WIDTH_;
 
-  typedef logic [0:WIDTH-1] bus_t;
-  typedef logic [0:$clog2(WIDTH)] bus_logsize_t;
+  typedef logic [0:WIDTH-1] bus_type;
+  typedef logic [0:$clog2(WIDTH)] bus_logsize_type;
 
   typedef enum logic [0:3] {
-    AND  = 4'b0000,
-    OR   = 4'b0001,
-    ADD  = 4'b0010,
-    SUB  = 4'b0110,
-    SLT  = 4'b0111,
-    NOR  = 4'b1100,
-    SLTU = 4'b1101
-  } ula_oper_t;
+    ULA_AND  = 4'b0000,
+    ULA_OR   = 4'b0001,
+    ULA_ADD  = 4'b0010,
+    ULA_SUB  = 4'b0110,
+    ULA_SLT  = 4'b0111,
+    ULA_NOR  = 4'b1100,
+    ULA_SLTU = 4'b1101
+  } ula_oper_type;
 
   // Taken from https://student.cs.uwaterloo.ca/~isg/res/mips/opcodes
   
   typedef enum logic [0:5] {
     OP_RTYPE    = 6'b000000,
     OP_ADDI	    = 6'b001000,	//ArithLogI
-    OP_ADDIU	  = 6'b001001,	//ArithLogI
+    //OP_ADDIU	  = 6'b001001,	//ArithLogI
     OP_ANDI	    = 6'b001100,	//ArithLogI
     OP_ORI	    = 6'b001101,	//ArithLogI
     OP_XORI	    = 6'b001110,	//ArithLogI
     OP_LHI	    = 6'b011001,	//LoadI
     OP_LLO	    = 6'b011000,	//LoadI
     OP_SLTI	    = 6'b001010,	//ArithLogI
-    OP_SLTIU	  = 6'b001001,	//ArithLogI
+    //OP_SLTIU	  = 6'b001001,	//ArithLogI
     OP_BEQ	    = 6'b000100,	//Branch	
     OP_BGTZ	    = 6'b000111,	//BranchZ
     OP_BLEZ	    = 6'b000110,	//BranchZ
@@ -47,7 +47,7 @@ package types;
     OP_SH	      = 6'b101001,	//LoadStore
     OP_SW	      = 6'b101011,	//LoadStore
     OP_TRAP	    = 6'b011010
-  } opcode;
+  } opcode_type;
 
     typedef enum logic [0:5] {
     FUNC_ADD	  = 6'b100000,	//ArithLog
@@ -76,7 +76,7 @@ package types;
     FUNC_MFLO	  = 6'b010010,	//MoveFrom
     FUNC_MTHI	  = 6'b010001,	//MoveTo	
     FUNC_MTLO	  = 6'b010011 	//MoveTo
-    } funct;
+    } funct_type;
     
 endpackage
 

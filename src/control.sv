@@ -1,7 +1,7 @@
 module ControlModule
-  import types::*;
+import types::*;
 (
-    input  opcode       op,
+    input  opcode_type       op,
     output logic        regDst,
                         aluSrc,
                         memToReg,
@@ -14,9 +14,9 @@ module ControlModule
 
 always_comb begin
 
-    regDst      = 0;
-    aluSrc      = x;
-    memToReg    = x;
+    regDst      = 1'bx;
+    aluSrc      = 1'bx;
+    memToReg    = 1'bx;
     regWrite    = 0;
     memRead     = 0;
     memWrite    = 0;
@@ -25,6 +25,7 @@ always_comb begin
 
     case(op)
         OP_LW: begin
+            regDst      = 0;
             aluSrc      = 1;
             memToReg    = 1;
             regWrite    = 1;
@@ -32,13 +33,11 @@ always_comb begin
             aluOp       = 2'b00;
         end     
         OP_SW: begin
-            regDst      = x;
             aluSrc      = 1;
             memWrite    = 1;
             aluOp       = 2'b00;
         end      
         OP_BEQ: begin
-            regDst      = x;
             aluSrc      = 0;
             branch      = 1;
             aluOp       = 2'b01;

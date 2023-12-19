@@ -1,17 +1,21 @@
 module ALUControlModule
-  import types::*;
+import types::*;
 (
-    input  logic funct,
-    output logic operation
+    input  logic [0:1] aluOp,
+    input  logic [0:5] funct,
+    output logic [0:3] operation
 );
 
 always_comb begin
-    case(funct)
-        4'b0000: operation = 0010;
-        4'b0010: operation = 0110;
-        4'b0100: operation = 0000;
-        4'b0101: operation = 0001;
-        4'b1010: operation = 0111;
+    casez({aluOp, funct})
+        8'b00zzzzzz:        operation = ULA_ADD;
+        8'b01zzzzzz:        operation = ULA_SUB;
+        {2'b10, FUNC_ADD}:  operation = ULA_ADD;
+        {2'b10, FUNC_SUB}:  operation = ULA_SUB;
+        {2'b10, FUNC_AND}:  operation = ULA_AND;
+        {2'b10, FUNC_OR}:   operation = ULA_OR;
+        {2'b10, FUNC_SLT}:  operation = ULA_SLT;
+        default:            operation = ULA_ADD;
     endcase
 end
 

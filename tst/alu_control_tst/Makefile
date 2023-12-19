@@ -5,7 +5,7 @@ SIM = icarus
 TOPLEVEL_LANG = verilog
 
 VERILOG_SOURCES += ../../src/types.sv			\
-				   ../../src/control.sv			
+				   ../../src/alucontrol.sv
 # use VHDL_SOURCES for VHDL files
 #
 # Dump VCD files
@@ -26,11 +26,11 @@ ifeq ($(SIM), $(filter $(SIM), icarus modelsim questa))
 endif
 
 # TOPLEVEL is the name of the toplevel module in your Verilog or VHDL file
-TOPLEVEL = ControlModule
+TOPLEVEL = ALUControlModule
 
 
 # MODULE is the basename of the Python test file
-MODULE = control_test
+MODULE = alu_control_test
 
 # include cocotb's make rules to take care of the simulator setup
 include $(shell cocotb-config --makefiles)/Makefile.sim
