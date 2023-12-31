@@ -2,7 +2,7 @@ module Aritmethic
 import types::*;
 (
     input bus_type a, b,
-    input ula_oper_type sel,
+    input alu_oper_type sel,
     output bus_type s,
     output bus_type zero    
 );
@@ -22,16 +22,16 @@ SltModule slt_instance(.a(a), .b(b), .slt_sel(slt_sel), .s(results_slt));
 
 NorModule nor_instance(.a(a), .b(b), .s(results_nor));
 
-assign slt_sel = sel == ULA_SLT ? 0 : 1;
+assign slt_sel = sel == ALU_SLT ? 0 : 1;
 
 always_comb begin
     case(sel)
-        ULA_AND:            s = results_and;
-        ULA_OR:             s = results_or;
-        ULA_ADD:            s = results_add;
-        ULA_SUB:            s = results_sub;
-        ULA_SLT, ULA_SLTU:  s = results_slt;
-        ULA_NOR:            s = results_nor;
+        ALU_AND:            s = results_and;
+        ALU_OR:             s = results_or;
+        ALU_ADD:            s = results_add;
+        ALU_SUB:            s = results_sub;
+        ALU_SLT, ALU_SLTU:  s = results_slt;
+        ALU_NOR:            s = results_nor;
     endcase
     if (s == 4'b000) begin
         zero = 4'b1111;

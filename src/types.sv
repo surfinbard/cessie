@@ -10,14 +10,14 @@ package types;
   typedef logic [0:$clog2(WIDTH)] bus_logsize_type;
 
   typedef enum logic [0:3] {
-    ULA_AND  = 4'b0000,
-    ULA_OR   = 4'b0001,
-    ULA_ADD  = 4'b0010,
-    ULA_SUB  = 4'b0110,
-    ULA_SLT  = 4'b0111,
-    ULA_NOR  = 4'b1100,
-    ULA_SLTU = 4'b1101
-  } ula_oper_type;
+    ALU_AND  = 4'b0000,
+    ALU_OR   = 4'b0001,
+    ALU_ADD  = 4'b0010,
+    ALU_SUB  = 4'b0110,
+    ALU_SLT  = 4'b0111,
+    ALU_NOR  = 4'b1100,
+    ALU_SLTU = 4'b1101
+  } alu_oper_type;
 
   // Taken from https://student.cs.uwaterloo.ca/~isg/res/mips/opcodes
   
