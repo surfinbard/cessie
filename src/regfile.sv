@@ -4,13 +4,13 @@ module RegFile
     input [0:5]  read_addr_1,
                  read_addr_2,
                  write_addr,
-    input  bus_t input_data,
+    input  bus_type input_data,
     input        clk, 
                  enable,
-    output bus_t fetched_value_1,
+    output bus_type fetched_value_1,
                  fetched_value_2
 );
-    reg bus_t registers[0:31];
+    reg bus_type registers[0:31];
 
   always @(posedge clk) begin
     if (enable) registers[write_addr] <= input_data; 

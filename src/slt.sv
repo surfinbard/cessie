@@ -1,10 +1,10 @@
 module SltModule
   import types::*;
 (
-    input  bus_t a,
-                 b,
-                 slt_sel,
-    output bus_t s
+    input  bus_type a,
+                    b,
+                    slt_sel,
+    output bus_type s
 );
 
   wire signed [0:31] signed_a, signed_b;

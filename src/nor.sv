@@ -1,9 +1,9 @@
 module NorModule
   import types::*;
 (
-    input  bus_t a,
+    input  bus_type a,
                  b,
-    output bus_t s
+    output bus_type s
 );
 
   assign s = ~(a | b);

@@ -1,14 +1,14 @@
 module Aritmethic
 import types::*;
 (
-    input bus_t a, b,
-    input ula_oper_t sel,
-    output bus_t s,
-    output bus_t zero    
+    input bus_type a, b,
+    input ula_oper_type sel,
+    output bus_type s,
+    output bus_type zero    
 );
 
-bus_t slt_sel;
-bus_t results_and, results_or, results_add, results_sub, results_slt, results_nor;
+bus_type slt_sel;
+bus_type results_and, results_or, results_add, results_sub, results_slt, results_nor;
 
 AndModule and_instance(.a(a), .b(b), .s(results_and));
 
@@ -22,16 +22,16 @@ SltModule slt_instance(.a(a), .b(b), .slt_sel(slt_sel), .s(results_slt));
 
 NorModule nor_instance(.a(a), .b(b), .s(results_nor));
 
+assign slt_sel = sel == ULA_SLT ? 0 : 1;
+
 always_comb begin
-    //todo update to test signed
-    slt_sel = 0;
     case(sel)
-        AND:            s = results_and;
-        OR:             s = results_or;
-        ADD:            s = results_add;
-        SUB:            s = results_sub;
-        SLT, SLTU:      s = results_slt;
-        NOR:            s = results_nor;
+        ULA_AND:            s = results_and;
+        ULA_OR:             s = results_or;
+        ULA_ADD:            s = results_add;
+        ULA_SUB:            s = results_sub;
+        ULA_SLT, ULA_SLTU:  s = results_slt;
+        ULA_NOR:            s = results_nor;
     endcase
     if (s == 4'b000) begin
         zero = 4'b1111;
