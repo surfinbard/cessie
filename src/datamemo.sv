@@ -11,10 +11,11 @@ module DataMemoModule
     reg bus_type registers[0:31];
 
   always @(posedge clk) begin
-    if (enable_read) read_data <= registers[address];
-//    else read_data <= 0;
-
     if (enable_write) registers[address] <= input_data; 
   end
 
+  always @(*) begin
+    if (enable_read) read_data <= registers[address];
+//    else read_data <= 0;
+  end
 endmodule : DataMemoModule
