@@ -1,4 +1,4 @@
-module InstrMemo
+module InstrMemoModule
   import types::*;
 (   
     input [0:5]  read_addr,
@@ -9,4 +9,4 @@ module InstrMemo
 
     assign instruction = registers[read_addr];
 
-endmodule : InstrMemo
+endmodule : InstrMemoModule

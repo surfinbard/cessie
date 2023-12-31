@@ -8,7 +8,7 @@ output logic[0:6] HEX0, HEX1, HEX2, HEX3, HEX4, HEX5, HEX6, HEX7);
 logic[0:7] hi, lo;
 
 import types::*;
-Aritmethic mul(.b(SW[0:7]),
+ArithmeticModule mul(.b(SW[0:7]),
 .a(SW[8:15]),
 .sel(types::oper_t'(SW[16:20])),
 .start(~KEY[0]),

@@ -1,4 +1,4 @@
-module DataMemo
+module DataMemoModule
   import types::*;
 (   
     input [0:5]     address,
@@ -17,4 +17,4 @@ module DataMemo
     if (enable_write) registers[address] <= input_data; 
   end
 
-endmodule : DataMemo
+endmodule : DataMemoModule

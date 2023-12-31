@@ -1,4 +1,4 @@
-module RegFile
+module RegFileModule
   import types::*;
 (   
     input [0:5]  read_addr_1,
@@ -19,4 +19,4 @@ module RegFile
   assign fetched_value_1 = read_addr_1 == 0 ? 0 : registers[read_addr_1];
   assign fetched_value_2 = read_addr_2 == 0 ? 0 : registers[read_addr_2];
 
-endmodule : RegFile
+endmodule : RegFileModule

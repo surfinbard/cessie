@@ -4,8 +4,8 @@
 SIM = icarus
 TOPLEVEL_LANG = verilog
 
-VERILOG_SOURCES += ../../src/types.sv 			\
-				   ../../src/regfile.sv
+VERILOG_SOURCES += ../../src/types.sv			\
+				   ../../src/datamemo.sv			
 # use VHDL_SOURCES for VHDL files
 #
 # Dump VCD files
@@ -26,10 +26,11 @@ ifeq ($(SIM), $(filter $(SIM), icarus modelsim questa))
 endif
 
 # TOPLEVEL is the name of the toplevel module in your Verilog or VHDL file
-TOPLEVEL = RegFileModule
+TOPLEVEL = DataMemoModule
+
 
 # MODULE is the basename of the Python test file
-MODULE = regfile_test
+MODULE = data_memo_test
 
 # include cocotb's make rules to take care of the simalutor setup
 include $(shell cocotb-config --makefiles)/Makefile.sim

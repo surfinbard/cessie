@@ -32,7 +32,7 @@ ifeq ($(SIM), $(filter $(SIM), icarus modelsim questa))
 endif
 
 # TOPLEVEL is the name of the toplevel module in your Verilog or VHDL file
-TOPLEVEL = Aritmethic
+TOPLEVEL = ArithmeticModule
 
 # MODULE is the basename of the Python test file
 MODULE = alu_test

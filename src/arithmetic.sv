@@ -1,4 +1,4 @@
-module Aritmethic
+module ArithmeticModule
 import types::*;
 (
     input bus_type a, b,
@@ -38,4 +38,4 @@ always_comb begin
     end
 end
 
-endmodule : Aritmethic
+endmodule : ArithmeticModule
