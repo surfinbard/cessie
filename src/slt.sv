@@ -3,7 +3,7 @@ module SltModule
 (
     input  bus_type a,
                     b,
-                    slt_sel,
+                    unsigned_slt,
     output bus_type s
 );
 
@@ -13,7 +13,7 @@ module SltModule
   assign signed_b = signed'(b);
 
   always_comb begin
-    if (slt_sel) 
+    if (unsigned_slt) 
       s = (a < b) ? '1 : '0;
     else 
       s = (signed_a < signed_b) ? '1 : '0;

@@ -7,7 +7,7 @@ import types::*;
     output bus_type zero    
 );
 
-bus_type slt_sel;
+bus_type unsigned_slt;
 bus_type results_and, results_or, results_add, results_sub, results_slt, results_nor;
 
 AndModule and_instance(.a(a), .b(b), .s(results_and));
@@ -18,11 +18,11 @@ AddModule add_instance(.a(a), .b(b), .s(results_add));
 
 SubModule sub_instance(.a(a), .b(b), .s(results_sub));
 
-SltModule slt_instance(.a(a), .b(b), .slt_sel(slt_sel), .s(results_slt));
+SltModule slt_instance(.a(a), .b(b), .unsigned_slt(unsigned_slt), .s(results_slt));
 
 NorModule nor_instance(.a(a), .b(b), .s(results_nor));
 
-assign slt_sel = sel == ALU_SLT ? 0 : 1;
+assign unsigned_slt = sel == ALU_SLT ? 0 : 1;
 
 always_comb begin
     case(sel)

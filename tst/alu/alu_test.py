@@ -210,31 +210,90 @@ async def sub_by_n_times(dut):
 ###############################################################
 
 @cocotb.test(skip=False)
-async def slt_zero(dut):
+async def unsigned_slt_zero(dut):
     tb = TB(TB.slt)
 
     tb.randomize_input()
+    await Timer(1, units='ns')
+    dut.unsigned_slt.value = 0xFFFF_FFFF
     dut.b.value = 0x0000_0000
+    await Timer(1, units='ns')
 
-    await Timer(10, units='ns')
     if int(dut.a.value) < int(dut.b.value):   
-        assert dut.s.value == 0x0000_0001, f'SLT mismatch: s: {dut.s.value} != 1.'
+        assert dut.s.value == 0xFFFF_FFFF, f'SLT mismatch: s: {dut.s.value} != 1.'
     else:
         assert dut.s.value ==  0x0000_0000, f'SLT mismatch: s: {dut.s.value} != 0.'
 
 @cocotb.test(skip=False)
-async def slt_maximum(dut):
+async def unsigned_slt_maximum(dut):
     tb = TB(TB.slt)
 
     tb.randomize_input()
+    await Timer(1, units='ns')
+    dut.unsigned_slt.value = 0xFFFF_FFFF
     dut.a.value = 0xFFFF_FFFF
+    await Timer(1, units='ns')
 
-    await Timer(10, units='ns')
     if int(dut.a.value) > int(dut.b.value):   
         assert dut.s.value == 0x0000_0000, f'SLT mismatch: s: {dut.s.value} != 0.'
     else:
-        assert dut.s.value ==  0x0000_0001, f'SLT mismatch: s: {dut.s.value} != 1.'
+        assert dut.s.value ==  0xFFFF_FFFF, f'SLT mismatch: s: {dut.s.value} != 1.'
 
+@cocotb.test(skip=False)
+async def signed_slt_zero(dut):
+    tb = TB(TB.slt)
+
+    tb.randomize_input()
+    await Timer(1, units='ns')
+    dut.unsigned_slt.value = 0x0000_0000
+    dut.b.value = 0x1000_0000
+    b_value = 0
+    await Timer(1, units='ns')
+
+    if str(dut.a.value)[0] == '0':
+        a_value = int(dut.a.value)      
+        if a_value < b_value:   
+            assert dut.s.value == 0xFFFF_FFFF, f'SLT mismatch: s: {dut.s.value} != 1.'
+        else:
+            assert dut.s.value ==  0x0000_0000, f'SLT mismatch: s: {dut.s.value} != 0.'
+
+    else:
+        a_value = int(str(dut.a.value)[1:])
+        if a_value > b_value:   
+            assert dut.s.value == 0xFFFF_FFFF, f'SLT mismatch: s: {dut.s.value} != 1.'
+        else:
+            assert dut.s.value ==  0x0000_0000, f'SLT mismatch: s: {dut.s.value} != 0.'
+
+@cocotb.test(skip=False)
+async def signed_slt_maximum(dut):
+    tb = TB(TB.slt)
+
+    tb.randomize_input()
+    await Timer(1, units='ns')
+    dut.unsigned_slt.value = 0x0000_0000
+    dut.a.value = 0xFFFF_FFFF
+    a_value = 127
+    await Timer(1, units='ns')
+
+    if str(dut.b.value)[0] == '0':
+        b_value = int(dut.b.value)      
+        if a_value > b_value:   
+            assert dut.s.value == 0x0000_0000, f'SLT mismatch: s: {dut.s.value} != 0.'
+        else:
+            assert dut.s.value ==  0xFFFF_FFFF, f'SLT mismatch: s: {dut.s.value} != 1.'
+
+    else:
+        b_value = int(str(dut.b.value)[1:])
+        if a_value < b_value:   
+            assert dut.s.value == 0x0000_0000, f'SLT mismatch: s: {dut.s.value} != 0.'
+        else:
+            assert dut.s.value ==  0xFFFF_FFFF, f'SLT mismatch: s: {dut.s.value} != 1.'
+
+
+    print('a: ', dut.a.value)
+    print('b: ', dut.b.value)
+    print('unsigned_slt: ', dut.unsigned_slt.value)
+    print('s: ', dut.s.value)
 ###############################################################
 
 @cocotb.test(skip=False)
