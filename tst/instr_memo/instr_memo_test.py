@@ -5,11 +5,11 @@ class TB:
 
     def __init__(self):
         for i in range(32):
-            TB.dut.registers[i] = 0
+            TB.dut.registers[i].value = 0
 
     async def config(self):
         for i in range(32):
-            TB.dut.registers[i] = i    
+            TB.dut.registers[i].value = i    
             await Timer(10, units='ns')
 
 ###############################################################
