@@ -7,7 +7,6 @@ package types;
   parameter int WIDTH = `_WIDTH_;
 
   typedef logic [0:WIDTH-1] bus_type;
-  typedef logic [0:$clog2(WIDTH)] bus_logsize_type;
 
   typedef enum logic [0:3] {
     ALU_AND  = 4'b0000,
