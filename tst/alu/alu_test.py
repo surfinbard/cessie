@@ -120,7 +120,7 @@ async def add_with_zero(dut):
         dut.a.value = 0
 
         await Timer(10, units='ns')
-        assert dut.s.value == dut.b.value, f'Adding mismatch: s: {dut.s.value} != {dut.b.value}.'
+        assert dut.s.value == dut.b.value, f'ADD mismatch: s: {dut.s.value} != {dut.b.value}.'
 
 
 @cocotb.test(skip=False)
@@ -132,7 +132,7 @@ async def add_by_one(dut):
         dut.a.value = 1
 
         await Timer(10, units='ns')
-        assert dut.s.value == dut.b.value + 1, f'Adding mismatch: s: {dut.s.value} != {dut.b.value + 1}.'
+        assert dut.s.value == dut.b.value + 1, f'ADD mismatch: s: {dut.s.value} != {dut.b.value + 1}.'
 
 
 @cocotb.test(skip=False)
@@ -143,7 +143,7 @@ async def add_by_maximum(dut):
     dut.b.value = 0xFFFF_FFFF
    
     await Timer(10, units='ns')
-    assert dut.s.value == (dut.a.value + dut.b.value) & 0xFFFF_FFFF, f'Adding mismatch: s: {hex(dut.s.value.integer)} != {hex((dut.a.value.integer + dut.b.value.integer) & 0xFFFF_FFFF)}.'
+    assert dut.s.value == (dut.a.value + dut.b.value) & 0xFFFF_FFFF, f'ADD mismatch: s: {hex(dut.s.value.integer)} != {hex((dut.a.value.integer + dut.b.value.integer) & 0xFFFF_FFFF)}.'
 
 
 @cocotb.test(skip=False)
@@ -154,7 +154,7 @@ async def add_by_n_times(dut):
         tb.randomize_input()
 
         await Timer(10, units='ns')
-        assert dut.s.value == (dut.a.value + dut.b.value) & 0xFFFF_FFFF, f'Adding mismatch: s: {hex(dut.s.value.integer & 0xFFFF_FFFF)} != {hex((dut.a.value.integer + dut.b.value.integer) & 0xFFFF_FFFF)}.'
+        assert dut.s.value == (dut.a.value + dut.b.value) & 0xFFFF_FFFF, f'ADD mismatch: s: {hex(dut.s.value.integer & 0xFFFF_FFFF)} != {hex((dut.a.value.integer + dut.b.value.integer) & 0xFFFF_FFFF)}.'
 
 ###############################################################
 
@@ -169,7 +169,7 @@ async def sub_with_zero(dut):
         await Timer(10, units='ns')
         # Python uses int as 64 bits. We are representing it with only 32,
         # masking is needed when comparing negative numbers
-        assert dut.s.value == -dut.b.value & 0xFFFF_FFFF, f'Subtracting mismatch: s: {hex(dut.s.value.integer)} != {hex(-dut.b.value.integer & 0xffff_ffff)}.'
+        assert dut.s.value == -dut.b.value & 0xFFFF_FFFF, f'SUB mismatch: s: {hex(dut.s.value.integer)} != {hex(-dut.b.value.integer & 0xffff_ffff)}.'
 
 
 @cocotb.test(skip=False)
@@ -183,7 +183,7 @@ async def sub_one_less_number(dut):
         await Timer(10, units='ns')
         # Python uses int as 64 bits. We are representing it with only 32,
         # masking is needing when comparing negative numbers
-        assert dut.s.value == (1-dut.b.value) & 0xFFFF_FFFF, f'Subtracting mismatch: s: {hex(dut.s.value.integer)} != {hex((1-dut.b.value.integer) & 0xffff_ffff)}.'
+        assert dut.s.value == (1-dut.b.value) & 0xFFFF_FFFF, f'SUB mismatch: s: {hex(dut.s.value.integer)} != {hex((1-dut.b.value.integer) & 0xffff_ffff)}.'
 
 
 @cocotb.test(skip=False)
@@ -194,7 +194,7 @@ async def sub_by_maximum(dut):
     dut.b.value = 0xFFFF_FFFF
    
     await Timer(10, units='ns')
-    assert dut.s.value == (dut.a.value - dut.b.value) & 0xFFFF_FFFF, f'Subtracting mismatch: s: {hex(dut.s.value.integer)} != {hex((dut.a.value.integer - dut.b.value.integer) & 0xFFFF_FFFF)}.'
+    assert dut.s.value == (dut.a.value - dut.b.value) & 0xFFFF_FFFF, f'SUB mismatch: s: {hex(dut.s.value.integer)} != {hex((dut.a.value.integer - dut.b.value.integer) & 0xFFFF_FFFF)}.'
 
 
 @cocotb.test(skip=False)
@@ -205,7 +205,7 @@ async def sub_by_n_times(dut):
         tb.randomize_input()
 
         await Timer(10, units='ns')
-        assert dut.s.value == (dut.a.value - dut.b.value) & 0xFFFF_FFFF, f'Adding mismatch: s: {hex(dut.s.value.integer & 0xFFFF_FFFF)} != {hex((dut.a.value.integer - dut.b.value.integer) & 0xFFFF_FFFF)}.'
+        assert dut.s.value == (dut.a.value - dut.b.value) & 0xFFFF_FFFF, f'SUB mismatch: s: {hex(dut.s.value.integer & 0xFFFF_FFFF)} != {hex((dut.a.value.integer - dut.b.value.integer) & 0xFFFF_FFFF)}.'
 
 ###############################################################
 
@@ -289,11 +289,6 @@ async def signed_slt_maximum(dut):
         else:
             assert dut.s.value ==  0xFFFF_FFFF, f'SLT mismatch: s: {dut.s.value} != 1.'
 
-
-    print('a: ', dut.a.value)
-    print('b: ', dut.b.value)
-    print('unsigned_slt: ', dut.unsigned_slt.value)
-    print('s: ', dut.s.value)
 ###############################################################
 
 @cocotb.test(skip=False)

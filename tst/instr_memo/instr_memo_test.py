@@ -20,5 +20,5 @@ async def instr_read(dut):
     await tb.config()
    
     for i in range(32):
-        assert dut.registers[i].value == i, f'Control mismatch in InstrMemo: {dut.registers[i].value} != {i}.'
+        assert dut.registers[i].value == i, f'Control mismatch in instr_read: {dut.registers[i].value} != {i}.'
 

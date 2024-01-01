@@ -49,7 +49,7 @@ async def reset(dut):
         dut.read_addr_1.value = i
         await Timer(10, units='ns')
         
-        assert dut.fetched_value_1.value == 0, f'Write mismatch: {dut.fetched_value_1.value} != 0.'
+        assert dut.fetched_value_1.value == 0, f'Reset mismatch: {dut.fetched_value_1.value} != 0.'
 
 ###############################################################
     
@@ -151,5 +151,5 @@ async def read_from_both(dut):
             dut.read_addr_1.value = j
             dut.read_addr_2.value = 32 - j
             await Timer(1, units='ns')
-            assert dut.fetched_value_1.value == j, f'Write mismatch: {dut.fetched_value_1.value} != j.'
-            assert dut.fetched_value_2.value == 32 - j, f'Write mismatch: {dut.fetched_value_2.value} != {32 - j}.'
+            assert dut.fetched_value_1.value == j, f'Read mismatch: {dut.fetched_value_1.value} != j.'
+            assert dut.fetched_value_2.value == 32 - j, f'Read mismatch: {dut.fetched_value_2.value} != {32 - j}.'
