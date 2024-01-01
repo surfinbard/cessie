@@ -1,7 +1,7 @@
 module ControlModule
 import types::*;
 (
-    input  opcode_type       op,
+    input  opcode_type  op,
     output logic        regDst,
                         aluSrc,
                         memToReg,

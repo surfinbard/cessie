@@ -1,12 +1,11 @@
 module AddModule
-  import types::*;
+import types::*;
 (
     input  bus_type a,
-                 b,
+                    b,
     output bus_type s
 );
 
-
-  assign s = a + b;
+assign s = a + b;
 
 endmodule : AddModule

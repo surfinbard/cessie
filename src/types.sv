@@ -79,5 +79,3 @@ package types;
     } funct_type;
     
 endpackage
-
-

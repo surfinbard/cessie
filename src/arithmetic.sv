@@ -1,10 +1,10 @@
 module ArithmeticModule
 import types::*;
 (
-    input bus_type a, b,
-    input alu_oper_type sel,
-    output bus_type s,
-    output bus_type zero    
+    input   bus_type        a, b,
+    input   alu_oper_type   sel,
+    output  bus_type        s,
+    output  bus_type        zero    
 );
 
 bus_type unsigned_slt;

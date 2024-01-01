@@ -1,11 +1,11 @@
 module OrModule
-  import types::*;
+import types::*;
 (
     input  bus_type a,
-                 b,
+                    b,
     output bus_type s
 );
 
-  always_comb s = a | b;
+always_comb s = a | b;
 
 endmodule : OrModule
