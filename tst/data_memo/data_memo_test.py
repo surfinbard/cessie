@@ -4,7 +4,7 @@ from cocotb.clock import Clock
 class TB:
     dut = cocotb.top
 
-    def __init__(self, cycle=2):
+    def __init__(self, cycle=1):
         cocotb.start_soon(Clock(TB.dut.clk, cycle, 'ns').start())
         TB.dut.enable_write.value = 0
         TB.dut.enable_read.value = 0
@@ -12,7 +12,8 @@ class TB:
     async def config(self):
         TB.dut.enable_write.value = 1
         for i in range(32):
-            TB.dut.registers[i].value = 0
+            TB.dut.address.value = i
+            TB.dut.input_data.value = 0
             await RisingEdge(TB.dut.clk)
         TB.dut.enable_write.value = 0
         TB.dut.enable_read.value = 0
@@ -20,7 +21,8 @@ class TB:
     async def set_in_increments(self):
         TB.dut.enable_write.value = 1
         for i in range(32):
-            TB.dut.registers[i].value = i
+            TB.dut.address.value = i
+            TB.dut.input_data.value = i
             await RisingEdge(TB.dut.clk)
         TB.dut.enable_write.value = 0
 
@@ -40,22 +42,16 @@ async def read_enable_on(dut):
     await tb.set_in_increments()
 
     dut.enable_read.value = 1
-
     for i in range(32):
         dut.address.value = i
-        await Timer(1, units='ns')
+        await RisingEdge(TB.dut.clk)
         
         assert dut.read_data.value == i, f'Control mismatch in read_enable_on: {dut.read_data.value} != {i}.'
-
 
 @cocotb.test(skip=False)
 async def write_enable_off(dut):
     tb = TB()
     await tb.config()
-
-    print("before:")
-    for i in range(32):
-        print(i, ': ', dut.registers[i])
 
     dut.enable_write.value = 0
     for i in range(32):
@@ -63,14 +59,10 @@ async def write_enable_off(dut):
         dut.input_data.value = i
         await RisingEdge(TB.dut.clk)
 
-    print("after:")
-    for i in range(32):
-        print(i, ': ', dut.registers[i])
-
     dut.enable_read.value = 1
     for i in range(32):
         dut.address.value = i
-        await Timer(1, units='ns')
+        await RisingEdge(TB.dut.clk)
         
         assert dut.read_data.value == 0, f'Control mismatch in write_enable_off: {dut.read_data.value} != 0.'
 
@@ -89,6 +81,6 @@ async def write_enable_on(dut):
     dut.enable_read.value = 1
     for i in range(32):
         dut.address.value = i
-        await Timer(1, units='ns')
+        await RisingEdge(TB.dut.clk)    
         
         assert dut.read_data.value == i, f'Control mismatch in write_enable_on: {dut.read_data.value} != {i}.'
