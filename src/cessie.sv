@@ -34,7 +34,7 @@ AddModule four_adder(.a() .b(), .s());
 
 AddModule alu_result_adder(.a(), .b(), .s());
 
-ArithmeticModule alu(.a(), .b(), .sel(), .s(), .zero());
+ALUModule alu(.a(), .b(), .sel(), .s(), .zero());
 
 RegFileModule reg_file(.read_addr_1(), .read_addr_2(), .write_addr(), .input_data(), .clk(), .enable(), .fetched_value_1(), .fetched_value_2());
 

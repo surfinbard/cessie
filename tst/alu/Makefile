@@ -5,7 +5,7 @@ SIM = icarus
 TOPLEVEL_LANG = verilog
 
 VERILOG_SOURCES += ../../src/types.sv 			\
-				   ../../src/arithmetic.sv 		\
+				   ../../src/alu.sv 			\
 				   ../../src/add.sv 			\
 				   ../../src/sub.sv 			\
 				   ../../src/and.sv 			\
@@ -32,7 +32,7 @@ ifeq ($(SIM), $(filter $(SIM), icarus modelsim questa))
 endif
 
 # TOPLEVEL is the name of the toplevel module in your Verilog or VHDL file
-TOPLEVEL = ArithmeticModule
+TOPLEVEL = ALUModule
 
 # MODULE is the basename of the Python test file
 MODULE = alu_test
