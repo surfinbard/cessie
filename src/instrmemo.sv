@@ -1,7 +1,7 @@
 module InstrMemoModule
 import types::*;
 (   
-    input [0:5]  read_addr,
+    input  bus_type read_addr,
     output bus_type instruction
 );
 

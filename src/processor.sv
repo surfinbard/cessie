@@ -1,8 +1,11 @@
-module Cessie
+module Processor
 import types::*;
 ();
 
-//make sl2, 4 muxes, 1 sign extend
+// make sl2, 4 muxes, 1 sign extend
+// out = {ent[0:29], 2'b00}
+// assing out = (sel)? in1: in2;
+// out = { {16{in[15]}}, in}
 
 reg bus_type pc;
 wire bus_type pc_to_four_adder;
@@ -46,4 +49,4 @@ ControlModule control(.op(), .regDst(), .aluSrc(), .memToReg(), .regWrite(), .me
 
 ALUControlModule alu_control(.aluOp(), .funct(), .operation());
 
-endmodule : Cessie
+endmodule : Processor

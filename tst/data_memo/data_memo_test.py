@@ -32,7 +32,6 @@ async def read_enable_off(dut):
     await tb.set_in_increments()
 
     for i in range(32):
-        # here
         assert dut.read_data.value == 0, f'Control mismatch in read_enable_off: {dut.read_data.value} != 0.'
 
 @cocotb.test(skip=False)

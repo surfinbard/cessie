@@ -1,8 +1,8 @@
 module DataMemoModule
 import types::*;
 (   
-    input  [0:5]    address,
-    input  bus_type input_data,
+    input  bus_type address,
+                    input_data,
     input           clk, 
                     enable_read,
                     enable_write,
@@ -16,9 +16,8 @@ always @(posedge clk) begin
 end
 
 always @(*) begin
-  if (enable_read) read_data <= registers[address];
-  else read_data <= 0;
-  //should it change to zero or keep last value?
+  if (enable_read) read_data = registers[address];
+  else read_data = 0;
 end
 
 endmodule : DataMemoModule
