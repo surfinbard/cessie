@@ -1,10 +1,8 @@
 module Processor
 import types::*;
-();
-
-// posso so perguntar variavel ? e deixar implicito que quero comparar com 1
-// posso atribuir na declaracao?
-// como pegar as flags dos controles e o zero da ula? clk?
+(
+    input clk
+);
 
 // remover wires redundzntes
 
@@ -36,6 +34,7 @@ wire [0:4] mux_to_regfile_write_reg;
 wire [0:15] instruction_memory_to_sign_extend;
 wire opcode_type instruction_memory_to_control;
 
+wire zero;
 wire regDst;
 wire aluSrc;
 wire memToReg;
@@ -56,22 +55,22 @@ assign instruction_memory_to_mux_0 = instruction_memory_output[16:20];
 assign instruction_memory_to_mux_1 = instruction_memory_output[11:15];
 assign instruction_memory_to_alu_control = instruction_memory_output[26:31];
 
-assign mux_to_regfile_write_reg = regDst = 0 ? instruction_memory_to_mux_0 : instruction_memory_to_mux_1;
-assign mux_to_alu = aluSrc = 0 ? regfile_read_data_2_to_mux : sign_extend_to_mux;
-assign mux_to_regfile_write_data = memToReg = 0 ? alu_to_mux : data_memory_to_mux;
-assign mux_to_pc = (branch & zero) = 0 ? four_adder_output : alu_result_adder_to_mux;
+assign mux_to_regfile_write_reg = regDst ? instruction_memory_to_mux_1 : instruction_memory_to_mux_0;
+assign mux_to_alu = aluSrc ? sign_extend_to_mux : regfile_read_data_2_to_mux;
+assign mux_to_regfile_write_data = memToReg ? data_memory_to_mux : alu_to_mux;
+assign mux_to_pc = (branch & zero) ? alu_result_adder_to_mux : four_adder_output;
 
-AddModule four_adder(.a(pc) .b(0x04), .s(four_adder_output));
+AddModule four_adder(.a(pc) .b(32'h4), .s(four_adder_output));
 
 AddModule alu_result_adder(.a(four_adder_output), .b(shift_left_to_alu_result_adder), .s(alu_result_adder_to_mux));
 
-ALUModule alu(.a(regfile_read_data_1_to_alu), .b(mux_to_alu), .sel(operation), .s(alu_to_data_memory), .zero(?));
+ALUModule alu(.a(regfile_read_data_1_to_alu), .b(mux_to_alu), .sel(operation), .s(alu_to_data_memory), .zero(zero));
 
-RegFileModule reg_file(.read_addr_1(instruction_memory_to_regfile_read_1), .read_addr_2(instruction_memory_to_regfile_read_2), .write_addr(mux_to_regfile_write_reg), .input_data(mux_to_regfile_write_data), .clk(?), .enable(regWrite), .fetched_value_1(regfile_read_data_1_to_alu), .fetched_value_2(regfile_read_data_2));
+RegFileModule reg_file(.read_addr_1(instruction_memory_to_regfile_read_1), .read_addr_2(instruction_memory_to_regfile_read_2), .write_addr(mux_to_regfile_write_reg), .input_data(mux_to_regfile_write_data), .clk(clk), .enable(regWrite), .fetched_value_1(regfile_read_data_1_to_alu), .fetched_value_2(regfile_read_data_2));
 
 InstrMemoModule instruction_memory(.read_addr(pc_to_instruction_memory), .instruction(instruction_memory_output));
 
-DataMemoModule data_memory(.address(alu_to_data_memory), .input_data(regfile_read_data_2), .clk(?), .enable_read(memRead), .enable_write(memWrite), .read_data(data_memory_to_mux));
+DataMemoModule data_memory(.address(alu_to_data_memory), .input_data(regfile_read_data_2), .clk(clk), .enable_read(memRead), .enable_write(memWrite), .read_data(data_memory_to_mux));
 
 ControlModule control(.op(instruction_memory_to_control), .regDst(regDst), .aluSrc(aluSrc), .memToReg(memToReg), .regWrite(regWrite), .memRead(memRead), .memWrite(memWrite), .branch(branch), .aluOp(aluOp));
 
