@@ -3,7 +3,7 @@ import types::*;
 (
     input  bus_type a,
                     b,
-                    unsigned_slt,
+    input  logic    unsigned_slt,
     output bus_type s
 );
 

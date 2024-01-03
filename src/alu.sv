@@ -7,7 +7,7 @@ import types::*;
     output  bus_type        zero    
 );
 
-bus_type unsigned_slt;
+reg unsigned_slt;
 bus_type results_and, results_or, results_add, results_sub, results_slt, results_nor;
 
 AndModule and_instance(.a(a), .b(b), .s(results_and));
@@ -32,10 +32,12 @@ always_comb begin
         ALU_SUB:            s = results_sub;
         ALU_SLT, ALU_SLTU:  s = results_slt;
         ALU_NOR:            s = results_nor;
+        default:            s = results_and;
     endcase
-    if (s == 4'b000) begin
-        zero = 4'b1111;
-    end
+    if (s == 32'b0) 
+        zero = 1;
+    else
+        zero = 0;
 end
 
 endmodule : ALUModule

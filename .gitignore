@@ -2,3 +2,4 @@ venv/
 tst/*/__pycache__/
 tst/*/sim_build/
 tst/*/*.xml
+tst/*/*.fst
