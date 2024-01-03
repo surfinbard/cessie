@@ -1,7 +1,7 @@
 module RegFileModule
 import types::*;
 (   
-    input [0:5]     read_addr_1,
+    input [0:4]     read_addr_1,
                     read_addr_2,
                     write_addr,
     input  bus_type input_data,
@@ -11,7 +11,7 @@ import types::*;
                     fetched_value_2
 );
 
-reg bus_type registers[0:31];
+bus_type registers[0:31];
 
 always @(posedge clk) begin
   if (enable) registers[write_addr] <= input_data; 

@@ -5,7 +5,7 @@ import types::*;
     output bus_type instruction
 );
 
-reg bus_type registers[0:31];
+bus_type registers[0:31];
 
 assign instruction = registers[read_addr];
 

@@ -9,7 +9,7 @@ import types::*;
     output bus_type read_data
 );
     
-reg bus_type registers[0:31];
+bus_type registers[0:31];
 
 always @(posedge clk) begin
   if (enable_write) registers[address] <= input_data;     
