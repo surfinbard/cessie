@@ -4,7 +4,7 @@ import types::*;
     input   bus_type        a, b,
     input   alu_oper_type   sel,
     output  bus_type        s,
-    output  bus_type        zero    
+    output  logic           zero    
 );
 
 reg unsigned_slt;
@@ -24,6 +24,8 @@ NorModule nor_instance(.a(a), .b(b), .s(results_nor));
 
 assign unsigned_slt = sel == ALU_SLT ? 0 : 1;
 
+assign zero = s == 32'b0 ? 1 : 0;
+
 always_comb begin
     case(sel)
         ALU_AND:            s = results_and;
@@ -34,10 +36,6 @@ always_comb begin
         ALU_NOR:            s = results_nor;
         default:            s = results_and;
     endcase
-    if (s == 32'b0) 
-        zero = 1;
-    else
-        zero = 0;
 end
 
 endmodule : ALUModule
