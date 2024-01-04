@@ -4,15 +4,16 @@ import cocotb
 from cocotb.triggers import Timer
 
 class TB:
-    andmod = 0x0
-    ormod = 0x1
-    add = 0x2
-    sub = 0x6
-    slt = 0x7
-    nor = 0xC
+    andmod  = 0x0
+    ormod   = 0x1
+    addmod  = 0x2
+    submod  = 0x6
+    sltmod  = 0x7
+    normod  = 0xC
+    sltumod = 0xD
     dut = cocotb.top
 
-    def __init__(self, mode = add, cycle=2):
+    def __init__(self, mode = addmod, cycle=2):
         TB.dut.sel.value = mode
 
     def randomize_input(self):
@@ -113,7 +114,7 @@ async def or_by_n_times(dut):
 
 @cocotb.test(skip=False)
 async def add_with_zero(dut):
-    tb = TB(TB.add)
+    tb = TB(TB.addmod)
 
     for i in range(10):
         tb.randomize_input()
@@ -125,7 +126,7 @@ async def add_with_zero(dut):
 
 @cocotb.test(skip=False)
 async def add_by_one(dut):
-    tb = TB(TB.add)
+    tb = TB(TB.addmod)
 
     for i in range(10):
         tb.randomize_input()
@@ -137,7 +138,7 @@ async def add_by_one(dut):
 
 @cocotb.test(skip=False)
 async def add_by_maximum(dut):
-    tb = TB(TB.add)
+    tb = TB(TB.addmod)
 
     dut.a.value = 0xFFFF_FFFF
     dut.b.value = 0xFFFF_FFFF
@@ -148,7 +149,7 @@ async def add_by_maximum(dut):
 
 @cocotb.test(skip=False)
 async def add_by_n_times(dut):
-    tb = TB(TB.add)
+    tb = TB(TB.addmod)
 
     for i in range(10):
         tb.randomize_input()
@@ -160,7 +161,7 @@ async def add_by_n_times(dut):
 
 @cocotb.test(skip=False)
 async def sub_with_zero(dut):
-    tb = TB(TB.sub)
+    tb = TB(TB.submod)
 
     for i in range(10):
         tb.randomize_input()
@@ -174,7 +175,7 @@ async def sub_with_zero(dut):
 
 @cocotb.test(skip=False)
 async def sub_one_less_number(dut):
-    tb = TB(TB.sub)
+    tb = TB(TB.submod)
 
     for i in range(10):
         tb.randomize_input()
@@ -188,7 +189,7 @@ async def sub_one_less_number(dut):
 
 @cocotb.test(skip=False)
 async def sub_by_maximum(dut):
-    tb = TB(TB.sub)
+    tb = TB(TB.submod)
 
     dut.a.value = 0xFFFF_FFFF
     dut.b.value = 0xFFFF_FFFF
@@ -199,7 +200,7 @@ async def sub_by_maximum(dut):
 
 @cocotb.test(skip=False)
 async def sub_by_n_times(dut):
-    tb = TB(TB.sub)
+    tb = TB(TB.submod)
 
     for i in range(10):
         tb.randomize_input()
@@ -211,7 +212,7 @@ async def sub_by_n_times(dut):
 
 @cocotb.test(skip=False)
 async def unsigned_slt_zero(dut):
-    tb = TB(TB.slt)
+    tb = TB(TB.sltumod)
 
     tb.randomize_input()
     await Timer(2, units='ns')
@@ -226,31 +227,26 @@ async def unsigned_slt_zero(dut):
 
 @cocotb.test(skip=False)
 async def unsigned_slt_maximum(dut):
-    tb = TB(TB.slt)
+    tb = TB(TB.sltumod)
 
     tb.randomize_input()
     await Timer(2, units='ns')
     dut.unsigned_slt.value = 1
     dut.a.value = 0xFFFF_FFFF
     await Timer(2, units='ns')
-    print(dut.unsigned_slt.value) 
 
     if int(dut.a.value) > int(dut.b.value): 
-        print(dut.a.value) 
-        print(dut.b.value) 
-        print(dut.unsigned_slt.value) 
-        print(dut.s.value)  
         assert dut.s.value == 0x0000_0000, f'SLT mismatch: s: {dut.s.value} != 0.'
     else:
         assert dut.s.value ==  0xFFFF_FFFF, f'SLT mismatch: s: {dut.s.value} != 1.'
 
 @cocotb.test(skip=False)
 async def signed_slt_zero(dut):
-    tb = TB(TB.slt)
+    tb = TB(TB.sltmod)
 
     tb.randomize_input()
     await Timer(2, units='ns')
-    dut.unsigned_slt.value = 0x0000_0000
+    dut.unsigned_slt.value = 0
     dut.b.value = 0x1000_0000
     b_value = 0
     await Timer(2, units='ns')
@@ -262,7 +258,7 @@ async def signed_slt_zero(dut):
         else:
             assert dut.s.value ==  0x0000_0000, f'SLT mismatch: s: {dut.s.value} != 0.'
 
-    else:
+    else:          
         a_value = int(str(dut.a.value)[1:])
         if a_value > b_value:   
             assert dut.s.value == 0xFFFF_FFFF, f'SLT mismatch: s: {dut.s.value} != 1.'
@@ -271,11 +267,11 @@ async def signed_slt_zero(dut):
 
 @cocotb.test(skip=False)
 async def signed_slt_maximum(dut):
-    tb = TB(TB.slt)
+    tb = TB(TB.sltmod)
 
     tb.randomize_input()
     await Timer(2, units='ns')
-    dut.unsigned_slt.value = 0x0000_0000
+    dut.unsigned_slt.value = 0
     dut.a.value = 0xFFFF_FFFF
     a_value = 127
     await Timer(2, units='ns')
