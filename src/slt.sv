@@ -7,7 +7,7 @@ import types::*;
     output bus_type s
 );
 
-wire signed [0:31] signed_a, signed_b;
+wire signed [31:0] signed_a, signed_b;
 
 assign signed_a = signed'(a);
 assign signed_b = signed'(b);

@@ -1,9 +1,9 @@
 module ALUControlModule
 import types::*;
 (
-    input  logic [0:1] aluOp,
-    input  logic [0:5] funct,
-    output logic [0:3] operation
+    input  logic [1:0] aluOp,
+    input  logic [5:0] funct,
+    output logic [3:0] operation
 );
 
 always_comb begin

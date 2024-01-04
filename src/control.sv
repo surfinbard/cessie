@@ -9,11 +9,13 @@ import types::*;
                         memRead,
                         memWrite,
                         branch,
-    output logic [0:1]  aluOp            
+                        jump,
+    output logic [1:0]  aluOp            
 );
 
 always_comb begin
 
+    jump        = 0;
     regDst      = 1'bx;
     aluSrc      = 1'bx;
     memToReg    = 1'bx;
@@ -24,6 +26,9 @@ always_comb begin
     aluOp       = 2'bxx;
 
     case(op)
+        OP_J: begin
+            jump        = 1;
+        end
         OP_LW: begin
             regDst      = 0;
             aluSrc      = 1;
