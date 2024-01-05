@@ -5,6 +5,7 @@ import types::*;
 );
 
 bus_type pc;
+initial #3 pc = 0; 
 
 bus_type pc_to_four_adder;
 bus_type four_adder_output;
@@ -41,7 +42,8 @@ wire memToReg;
 wire regWrite;
 wire memRead;
 wire memWrite;
-wire branch;
+wire branchBeq;
+wire branchBne;
 wire [1:0] aluOp;
 wire [5:0] funct;
 wire [3:0] operation;
@@ -63,9 +65,11 @@ assign shift_left_to_alu_result_adder = {sign_extend_output[29:0], 2'b00};
 assign mux_to_regfile_write_reg = regDst ? instruction_memory_to_mux_1 : instruction_memory_to_mux_0;
 assign mux_to_alu = aluSrc ? sign_extend_output : regfile_read_data_2;
 assign mux_to_regfile_write_data = memToReg ? data_memory_to_mux : alu_output;
-assign mux_to_mux = (branch & zero) ? alu_result_adder_to_mux : four_adder_output;
+assign mux_to_mux = (branchBeq & zero | branchBne & ~zero) ? alu_result_adder_to_mux : four_adder_output;
 
 assign mux_to_pc = jump ? jump_address : mux_to_mux;
+
+always_ff @(posedge clk) pc <= mux_to_pc;
 
 AddModule four_adder(.a(pc), .b(32'h4), .s(four_adder_output));
 
@@ -79,7 +83,7 @@ InstrMemoModule instruction_memory(.read_addr(pc), .instruction(instruction_memo
 
 DataMemoModule data_memory(.address(alu_output), .input_data(regfile_read_data_2), .clk(clk), .enable_read(memRead), .enable_write(memWrite), .read_data(data_memory_to_mux));
 
-ControlModule control(.op(instruction_memory_to_control), .jump(jump), .regDst(regDst), .aluSrc(aluSrc), .memToReg(memToReg), .regWrite(regWrite), .memRead(memRead), .memWrite(memWrite), .branch(branch), .aluOp(aluOp));
+ControlModule control(.op(instruction_memory_to_control), .jump(jump), .regDst(regDst), .aluSrc(aluSrc), .memToReg(memToReg), .regWrite(regWrite), .memRead(memRead), .memWrite(memWrite), .branchBeq(branchBeq), .branchBne(branchBne), .aluOp(aluOp));
 
 ALUControlModule alu_control(.aluOp(aluOp), .funct(funct), .operation(operation));
 

@@ -8,7 +8,8 @@ import types::*;
                         regWrite,
                         memRead,
                         memWrite,
-                        branch,
+                        branchBeq,
+                        branchBne,
                         jump,
     output logic [1:0]  aluOp            
 );
@@ -22,7 +23,8 @@ always_comb begin
     regWrite    = 0;
     memRead     = 0;
     memWrite    = 0;
-    branch      = 0;
+    branchBeq   = 0;
+    branchBne   = 0;
     aluOp       = 2'bxx;
 
     case(op)
@@ -44,9 +46,14 @@ always_comb begin
         end      
         OP_BEQ: begin
             aluSrc      = 0;
-            branch      = 1;
+            branchBeq   = 1;
             aluOp       = 2'b01;
-        end         
+        end    
+        OP_BNE: begin
+            aluSrc      = 0;
+            branchBne   = 1;
+            aluOp       = 2'b01;
+        end     
         OP_RTYPE: begin
             regDst      = 1;
             aluSrc      = 0;
@@ -54,6 +61,20 @@ always_comb begin
             regWrite    = 1;
             aluOp       = 2'b10;
         end 
+        OP_ADDI: begin
+            aluSrc      = 1;
+            regDst      = 0;
+            memToReg    = 0;
+            regWrite    = 1;
+            aluOp       = 2'b00;
+        end
+        // SLTI
+        // XOR
+        // XORI
+        // SLL
+        // SRL
+        // JAL
+        // JR
     endcase
 end
 
