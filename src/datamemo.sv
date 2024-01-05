@@ -9,14 +9,14 @@ import types::*;
     output bus_type read_data
 );
     
-bus_type registers[0:31];
+reg [7:0] registers[0:96];
 
 always @(posedge clk) begin
-  if (enable_write) registers[address] <= input_data;     
+  if (enable_write) {registers[address + 3], registers[address + 2], registers[address + 1], registers[address + 0]} <= input_data;     
 end
 
 always @(*) begin
-  if (enable_read) read_data = registers[address];
+  if (enable_read) read_data = {registers[address + 3], registers[address + 2], registers[address + 1], registers[address + 0]};
   else read_data = 0;
 end
 

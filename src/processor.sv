@@ -4,31 +4,37 @@ import types::*;
     input clk
 );
 
-reg bus_type pc;
+bus_type pc;
+initial #3 pc = 0; 
 
-wire bus_type pc_to_four_adder;
-wire bus_type four_adder_output;
-wire bus_type mux_to_pc;
-wire bus_type alu_result_adder_to_mux;
-wire bus_type instruction_memory_output;
-wire bus_type sign_extend_output;
-wire bus_type shift_left_to_alu_result_adder;
-wire bus_type regfile_read_data_1_to_alu;
-wire bus_type regfile_read_data_2;
-wire bus_type alu_output; 
-wire bus_type mux_to_alu;
-wire bus_type data_memory_to_mux;
-wire bus_type mux_to_regfile_write_data;
+bus_type pc_to_four_adder;
+bus_type four_adder_output;
+bus_type mux_to_pc;
+bus_type alu_result_adder_to_mux;
+bus_type instruction_memory_output;
+bus_type sign_extend_output;
+bus_type shift_left_to_alu_result_adder;
+bus_type regfile_read_data_1_to_alu;
+bus_type regfile_read_data_2;
+bus_type alu_output; 
+bus_type mux_to_alu;
+bus_type data_memory_to_mux;
+bus_type mux_to_regfile_write_data;
 
-wire [0:4] instruction_memory_to_regfile_read_1;
-wire [0:4] instruction_memory_to_regfile_read_2;
-wire [0:4] instruction_memory_to_mux_0;
-wire [0:4] instruction_memory_to_mux_1;
-wire [0:5] instruction_memory_to_alu_control;
-wire [0:4] mux_to_regfile_write_reg; 
-wire [0:15] instruction_memory_to_sign_extend;
-wire opcode_type instruction_memory_to_control;
+bus_type mux_to_mux;
+bus_type jump_address;
+wire [25:0] instruction_memory_to_shift_left_2;
 
+wire [4:0] instruction_memory_to_regfile_read_1;
+wire [4:0] instruction_memory_to_regfile_read_2;
+wire [4:0] instruction_memory_to_mux_0;
+wire [4:0] instruction_memory_to_mux_1;
+wire [5:0] instruction_memory_to_alu_control;
+wire [4:0] mux_to_regfile_write_reg; 
+wire [15:0] instruction_memory_to_sign_extend;
+opcode_type instruction_memory_to_control;
+
+wire jump;
 wire zero;
 wire regDst;
 wire aluSrc;
@@ -36,28 +42,36 @@ wire memToReg;
 wire regWrite;
 wire memRead;
 wire memWrite;
-wire branch;
-wire logic [0:1] aluOp;
-wire logic [0:5] funct;
-wire logic [0:3] operation;
+wire branchBeq;
+wire branchBne;
+wire [1:0] aluOp;
+wire [5:0] funct;
+wire [3:0] operation;
 
-assign instruction_memory_to_regfile_read_1 = instruction_memory_output[21:25];
-assign instruction_memory_to_regfile_read_2 = instruction_memory_output[16:20];
-assign instruction_memory_to_mux_0 = instruction_memory_output[16:20];
-assign instruction_memory_to_mux_1 = instruction_memory_output[11:15];
-assign instruction_memory_to_sign_extend = instruction_memory_output[0:15];
-assign instruction_memory_to_alu_control = instruction_memory_output[0:5];
-assign instruction_memory_to_control = instruction_memory_output[26:31];
+assign instruction_memory_to_shift_left_2 = instruction_memory_output[25:0];
+assign jump_address = {four_adder_output[31:28], instruction_memory_to_shift_left_2, 2'b00};
 
-assign sign_extend_output = { {16{instruction_memory_to_sign_extend[15]}}, instruction_memory_to_sign_extend}
-assign shift_left_to_alu_result_adder = {sign_extend_output[0:29], 2'b00}
+assign instruction_memory_to_regfile_read_1 = instruction_memory_output[25:21];
+assign instruction_memory_to_regfile_read_2 = instruction_memory_output[20:16];
+assign instruction_memory_to_mux_0 = instruction_memory_output[20:16];
+assign instruction_memory_to_mux_1 = instruction_memory_output[15:11];
+assign instruction_memory_to_sign_extend = instruction_memory_output[15:0];
+assign instruction_memory_to_alu_control = instruction_memory_output[5:0];
+assign instruction_memory_to_control = opcode_type'(instruction_memory_output[31:26]);
+
+assign sign_extend_output = { {16{instruction_memory_to_sign_extend[15]}}, instruction_memory_to_sign_extend};
+assign shift_left_to_alu_result_adder = {sign_extend_output[29:0], 2'b00};
 
 assign mux_to_regfile_write_reg = regDst ? instruction_memory_to_mux_1 : instruction_memory_to_mux_0;
 assign mux_to_alu = aluSrc ? sign_extend_output : regfile_read_data_2;
 assign mux_to_regfile_write_data = memToReg ? data_memory_to_mux : alu_output;
-assign mux_to_pc = (branch & zero) ? alu_result_adder_to_mux : four_adder_output;
+assign mux_to_mux = (branchBeq & zero | branchBne & ~zero) ? alu_result_adder_to_mux : four_adder_output;
 
-AddModule four_adder(.a(pc) .b(32'h4), .s(four_adder_output));
+assign mux_to_pc = jump ? jump_address : mux_to_mux;
+
+always_ff @(posedge clk) pc <= mux_to_pc;
+
+AddModule four_adder(.a(pc), .b(32'h4), .s(four_adder_output));
 
 AddModule alu_result_adder(.a(four_adder_output), .b(shift_left_to_alu_result_adder), .s(alu_result_adder_to_mux));
 
@@ -69,7 +83,7 @@ InstrMemoModule instruction_memory(.read_addr(pc), .instruction(instruction_memo
 
 DataMemoModule data_memory(.address(alu_output), .input_data(regfile_read_data_2), .clk(clk), .enable_read(memRead), .enable_write(memWrite), .read_data(data_memory_to_mux));
 
-ControlModule control(.op(instruction_memory_to_control), .regDst(regDst), .aluSrc(aluSrc), .memToReg(memToReg), .regWrite(regWrite), .memRead(memRead), .memWrite(memWrite), .branch(branch), .aluOp(aluOp));
+ControlModule control(.op(instruction_memory_to_control), .jump(jump), .regDst(regDst), .aluSrc(aluSrc), .memToReg(memToReg), .regWrite(regWrite), .memRead(memRead), .memWrite(memWrite), .branchBeq(branchBeq), .branchBne(branchBne), .aluOp(aluOp));
 
 ALUControlModule alu_control(.aluOp(aluOp), .funct(funct), .operation(operation));
 

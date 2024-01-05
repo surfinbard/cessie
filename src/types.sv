@@ -6,9 +6,9 @@
 package types;
   parameter int WIDTH = `_WIDTH_;
 
-  typedef logic [0:WIDTH-1] bus_type;
+  typedef logic [WIDTH-1:0] bus_type;
 
-  typedef enum logic [0:3] {
+  typedef enum logic [3:0] {
     ALU_AND  = 4'b0000,
     ALU_OR   = 4'b0001,
     ALU_ADD  = 4'b0010,
@@ -20,7 +20,7 @@ package types;
 
   // Taken from https://student.cs.uwaterloo.ca/~isg/res/mips/opcodes
   
-  typedef enum logic [0:5] {
+  typedef enum logic [5:0] {
     OP_RTYPE    = 6'b000000,
     OP_ADDI	    = 6'b001000,	//ArithLogI
     //OP_ADDIU	  = 6'b001001,	//ArithLogI
@@ -48,7 +48,7 @@ package types;
     OP_TRAP	    = 6'b011010
   } opcode_type;
 
-    typedef enum logic [0:5] {
+    typedef enum logic [5:0] {
     FUNC_ADD	  = 6'b100000,	//ArithLog
     FUNC_ADDU	  = 6'b100001,	//ArithLog
     FUNC_AND	  = 6'b100100,	//ArithLog
