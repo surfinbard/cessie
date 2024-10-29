@@ -11,6 +11,8 @@ VERILOG_SOURCES += ../../src/types.sv 			\
 				   ../../src/and.sv 			\
 				   ../../src/or.sv 				\
 				   ../../src/slt.sv 			\
+				   ../../src/sll.sv 			\
+				   ../../src/srl.sv 			\
 				   ../../src/nor.sv
 # use VHDL_SOURCES for VHDL files
 #

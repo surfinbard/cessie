@@ -8,6 +8,8 @@ package types;
 
   typedef logic [WIDTH-1:0] bus_type;
 
+  typedef logic [4:0] offset5_type;
+
   typedef enum logic [3:0] {
     ALU_AND  = 4'b0000,
     ALU_OR   = 4'b0001,

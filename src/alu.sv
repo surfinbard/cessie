@@ -28,11 +28,11 @@ assign zero = s == 32'b0 ? 1 : 0;
 
 always_comb begin
     case(sel)
-        ALU_AND:            s = results_and;
-        ALU_OR:             s = results_or;
         ALU_ADD:            s = results_add;
         ALU_SUB:            s = results_sub;
         ALU_SLT, ALU_SLTU:  s = results_slt;
+        ALU_AND:            s = results_and;
+        ALU_OR:             s = results_or;
         ALU_NOR:            s = results_nor;
         default:            s = results_and;
     endcase
