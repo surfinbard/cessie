@@ -30,7 +30,3 @@ This project features a MIPS processor core implemented in SystemVerilog. Key co
 ## Testing
 
 The processor is validated through a Fibonacci sequence algorithm written in C, compiled into MIPS Assembly, and executed on the processor.
-
----
-
-You can customize this further depending on your repository structure and specific project details!
